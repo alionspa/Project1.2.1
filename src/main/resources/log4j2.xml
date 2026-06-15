@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="debug">
+    <Appenders>
+        <!-- Налаштування циклічного лога за розміром -->
+        <RollingFile name="roll-by-size"
+                     fileName="target/log4j/roll-by-size/app.log"
+                     filePattern="target/log4j/roll-by-size/app-%i.log">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %m%n" />
+            <Policies>
+                <!-- Обмеження розміру файлу 100 КБ -->
+                <SizeBasedTriggeringPolicy size="100 KB" />
+            </Policies>
+            <DefaultRolloverStrategy max="2" />
+        </RollingFile>
+
+        <Console name="ConsoleAppender" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-10p %m%n" />
+        </Console>
+    </Appenders>
+
+    <Loggers>
+        <Root level="info">
+            <AppenderRef ref="ConsoleAppender"/>
+            <AppenderRef ref="roll-by-size"/>
+        </Root>
+    </Loggers>
+</Configuration>
